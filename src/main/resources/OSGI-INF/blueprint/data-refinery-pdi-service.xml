@@ -34,9 +34,9 @@
           <pen:di-plugin-mapping class="org.pentaho.di.trans.step.StepDataInterface" ref="ModelAnnotation_StepData"/>
       </pen:di-plugin>
   </bean>
-  <bean id="AutoAnnotate_StepData" class="org.pentaho.di.trans.steps.annotation.AutoAnnotateData" scope="prototype"/>
+  <bean id="AutoAnnotate_StepData" class="org.pentaho.di.trans.steps.annotation.GuessAnnotationsData" scope="prototype"/>
 
-  <bean id="AutoAnnotate_StepMeta" class="org.pentaho.di.trans.steps.annotation.AutoAnnotateMeta" scope="prototype">
+  <bean id="AutoAnnotate_StepMeta" class="org.pentaho.di.trans.steps.annotation.GuessAnnotationsMeta" scope="prototype">
     <pen:di-plugin type="org.pentaho.di.core.plugins.StepPluginType">
       <pen:di-plugin-mapping class="org.pentaho.di.trans.step.StepDataInterface" ref="AutoAnnotate_StepData"/>
     </pen:di-plugin>

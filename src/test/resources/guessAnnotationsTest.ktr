@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>autoAnnotateTest</name>
+    <name>Guess Annotations Test</name>
     <description />
     <extended_description />
     <trans_version />
@@ -489,13 +489,23 @@
   </connection>
   <order>
     <hop>
-      <from>CSV file input</from>
-      <to>Add sequence</to>
+      <from>Add sequence</from>
+      <to>Guess Annotations</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add sequence</from>
-      <to>Auto Annotate</to>
+      <from>Guess Annotations</from>
+      <to>Annotate Stream</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CSV file input</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Add sequence</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -534,8 +544,8 @@
     </GUI>
   </step>
   <step>
-    <name>Auto Annotate</name>
-    <type>AutoAnnotate</type>
+    <name>Annotate Stream</name>
+    <type>FieldMetadataAnnotation</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -544,6 +554,70 @@
       <method>none</method>
       <schema_name />
     </partitioning>
+    <category />
+    <targetOutputStep />
+    <annotations>
+      <annotation>
+        <name>58cab894-09cd-475c-b155-6b03026a4590</name>
+        <field>PRODUCT_LINE</field>
+        <type>CREATE_ATTRIBUTE</type>
+        <properties>
+          <property>
+            <name>hidden</name>
+            <value>false</value>
+          </property>
+          <property>
+            <name>unique</name>
+            <value>false</value>
+          </property>
+          <property>
+            <name>hierarchy</name>
+            <value>Product</value>
+          </property>
+          <property>
+            <name>name</name>
+            <value>Product Line</value>
+          </property>
+          <property>
+            <name>dimension</name>
+            <value>Product</value>
+          </property>
+        </properties>
+      </annotation>
+      <annotation>
+        <name>6f1f60be-15d6-488d-ab5b-45bd550b2eba</name>
+        <field>PRODUCT_CODE</field>
+        <type>CREATE_ATTRIBUTE</type>
+        <properties>
+          <property>
+            <name>hidden</name>
+            <value>false</value>
+          </property>
+          <property>
+            <name>unique</name>
+            <value>false</value>
+          </property>
+          <property>
+            <name>hierarchy</name>
+            <value>Product</value>
+          </property>
+          <property>
+            <name>name</name>
+            <value>Product Code</value>
+          </property>
+          <property>
+            <name>dimension</name>
+            <value>Product</value>
+          </property>
+          <property>
+            <name>parentAttribute</name>
+            <value>Product Line</value>
+          </property>
+        </properties>
+      </annotation>
+      <sharedDimension>N</sharedDimension>
+      <description />
+    </annotations>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -552,7 +626,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>608</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
@@ -648,6 +722,39 @@
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>YEAR_ID</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>QTR_ID</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>MONTH_ID</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <cluster_schema />
     <remotesteps>
@@ -657,7 +764,77 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
+      <xloc>32</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Guess Annotations</name>
+    <type>GuessAnnotations</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <sampleSize>0</sampleSize>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>ORDERNUMBER</name>
+      </field>
+      <field>
+        <name>SALES</name>
+      </field>
+      <field>
+        <name>PRODUCT_LINE</name>
+      </field>
+      <field>
+        <name>PRODUCT_CODE</name>
+      </field>
+      <field>
+        <name>ORDERLINENUMBER</name>
+      </field>
+      <field>
+        <name>QUANTITYORDERED</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>160</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
