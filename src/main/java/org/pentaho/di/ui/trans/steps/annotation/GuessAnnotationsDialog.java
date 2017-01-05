@@ -69,11 +69,11 @@ public class GuessAnnotationsDialog extends BaseStepDialog implements StepDialog
     shell.setLayout( shellLayout );
     props.setLook( shell );
     setShellImage( shell, input );
-    shell.setText( "Auto Annotate" );
+    shell.setText( "Guess Annotations" );
 
     // set min size of dialog
-    shell.setMinimumSize( SHELL_MIN_WIDTH, SHELL_MIN_WIDTH );
-    shell.setSize( SHELL_MIN_WIDTH, SHELL_MIN_WIDTH );
+    shell.setMinimumSize( 230, 150 );
+    shell.setSize( 230, 150 );
     props.setLook( shell );
 
     FormLayout formLayout = new FormLayout();
@@ -88,8 +88,8 @@ public class GuessAnnotationsDialog extends BaseStepDialog implements StepDialog
     wCancel = new Button( shell, SWT.PUSH );
     wCancel.setText( BaseMessages.getString( PKG, "System.Button.Cancel" ) + "  " ); // add spaces to push left
     FormData fdCancel = new FormData();
-    fdCancel.bottom = new FormAttachment( shell, 300 );
-    fdCancel.right = new FormAttachment( shell, 300 );
+    fdCancel.bottom = new FormAttachment( shell, 95 );
+    fdCancel.right = new FormAttachment( wSampleSize, 0, SWT.RIGHT );
     wCancel.setLayoutData( fdCancel );
     props.setLook( wCancel );
 
